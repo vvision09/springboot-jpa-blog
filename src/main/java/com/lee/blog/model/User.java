@@ -4,11 +4,12 @@ import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 
 import lombok.AllArgsConstructor;
@@ -22,6 +23,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 @Entity	//User 클래스 Mysql에 테이블이 자동 생성
+//@DynamicInsert : insert 시 null 필드 제외 
 public class User {
 	
 	@Id	//PK
@@ -37,11 +39,15 @@ public class User {
 	@Column(nullable=false,length = 50)
 	private String email;
 	
-	@ColumnDefault("'user'")	//"안에 '로 다시 감싸주어야 한다.
-	private String role;	//Enum을 쓰는게 좋다. Enum을 쓰면 어떤 데이터의 도메인을 만들어준다. // admin,user,manager
-										//Type을 String으로 두면 정해진 것 이외에 값이 들어가기 때문에 좋지 않다. 
-										// 도메인은 어떤 범위가 정해졌다는 것 
+	//@ColumnDefault("'user'")
+	@Enumerated(EnumType.STRING)	
+	private RoleType role;
 	
-	@CreationTimestamp //시간 자동입력
+	//Enum타입이 String인걸 명시
+	//Enum을 쓰는게 좋다. Enum을 쓰면 어떤 데이터의 도메인을 만들어준다. // admin,user,manager
+	//Type을 String으로 두면 정해진 것 이외에 값이 들어가기 때문에 좋지 않다. 
+	// 도메인은 어떤 범위가 정해졌다는 것 
+	
+	@CreationTimestamp //자바에서 현재 시간 자동입력
 	private Timestamp createDate;
 }
