@@ -66,11 +66,9 @@ public class DummyController {
 		
 		//userRepository.save(user);
 		
-		
 		return user;
 		
 	}
-	
 	
 	//한페이지당 2건의 데이터를 리턴
 	//페이지는 0부터 시작
