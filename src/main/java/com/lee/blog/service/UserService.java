@@ -1,5 +1,7 @@
 package com.lee.blog.service;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,14 +14,8 @@ public class UserService {
 	@Autowired
 	private UserRepository userRepository;
 	
-	public int save(User user) {
-		try {
-			userRepository.save(user);
-			return 1;
-		}catch(Exception e) {
-			e.printStackTrace();
-			System.out.println("UserService: save()" + e.getMessage());
-		}
-		return -1;
+	@Transactional
+	public void save(User user) {
+		userRepository.save(user);
 	}
 }
