@@ -7,6 +7,9 @@
 		$('#btn-save').on('click', () => { //function을 쓰지 않고 () => {}를 하는 이유는 this를 바인딩하기 위해서
 			this.save();
 		});
+		$('#btn-login').on('click', () => { //function을 쓰지 않고 () => {}를 하는 이유는 this를 바인딩하기 위해서
+			this.login();
+		});
 	},
 	save : function(){
 		//alert("save 호출");
@@ -24,14 +27,35 @@
 		$.ajax({
 			//회원가입 수행 요청
 			type:"POST",
-			url:"/blog/api/user",
+			url:"/api/user",
 			data:JSON.stringify(data),	//http body 데이터
 			contentType:"application/json;charset=utf-8", //body 데이터 형식 (MIME)
 			dataType:"json"	//요청을 서버로 해서 응답된 데이터 형식, 기본 응답형식은 문자열이다. (이때, 생긴게 JSON형식이라면 javascript오브젝트로 변경해줌)
 		}).done(function(response){
 			//응답결과가 정상 
 			alert("회원가입이 완료되었습니다.");
-			location.href="/blog";
+			location.href="/";
+		}).fail(function(error){
+			//응답결과 실패
+			alert(JSON.stringify(error));
+		});	
+	},
+		login : function(){
+		//alert("save 호출");
+		let data = {
+			username : $("#username").val(),
+			password : $("#password").val(),
+		};
+		$.ajax({
+			type:"POST",
+			url:"/api/user/login",
+			data:JSON.stringify(data),	
+			contentType:"application/json;charset=utf-8", 
+			dataType:"json"	
+		}).done(function(response){
+			//응답결과가 정상 
+			alert("로그인이 완료되었습니다.");
+			location.href="/";
 		}).fail(function(error){
 			//응답결과 실패
 			alert(JSON.stringify(error));
