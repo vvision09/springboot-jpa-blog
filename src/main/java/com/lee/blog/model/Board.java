@@ -50,7 +50,7 @@ public class Board {
 	//JPA를 사용하면 Object를 사용할 수 있다.
 	//FetchType.EAGER 는 Board를 select할때 무조건 User를 들고오라는 의미임 
 	
-	@OneToMany(mappedBy = "board",fetch=FetchType.EAGER)	
+	@OneToMany(mappedBy = "board",fetch=FetchType.LAZY)	
 	private List<Reply> reply;
 	//mappedBy : 연관관계의 주인이 아니다 (FK가 아니니까 DB에 컬럼을 만들지 마라)
 	//하나의 게시글에 여러 댓글이 달린다. 
