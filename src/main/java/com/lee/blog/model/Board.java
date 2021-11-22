@@ -40,7 +40,6 @@ public class Board {
 	@Lob //대용량 데이터
 	private String content;	//섬머노트 라이브러리 <html> 태그가 섞여서 디자인, 글자용량이 매우 커짐
 	
-	@ColumnDefault("0")	//숫자는 홑따옴표가 필요업다.
 	private int count; //조회수
 	
 	@ManyToOne(fetch = FetchType.EAGER)	
